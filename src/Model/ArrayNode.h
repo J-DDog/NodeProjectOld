@@ -18,6 +18,8 @@ public:
 	ArrayNode(Type value);
 	ArrayNode(Type value, ArrayNode * next);
 	virtual ~ArrayNode();
+	ArrayNode * getNext();
+	void setNext(ArrayNode * next)
 private:
 	ArrayNode * next;
 };

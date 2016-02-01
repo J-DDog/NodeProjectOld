@@ -9,15 +9,24 @@
 #define COM_CTEC_CONTROLLER_NODECONTROLLER_H_
 
 #include <iostream>
+#include <string>
 #include "../Model/Node.h"
+#include "../Model/Node.cpp"
+#include "../Model/ArrayNode.h"
+#include "../Model/ArrayNode.cpp"
+
+using namespace std;
 
 class NodeController
 {
 public:
 	NodeController();
 	virtual ~NodeController();
+	void start();
 private:
 	Node<int> intNode;
+	ArrayNode<string> stringArrayNode;
+	ArrayNode<string> otherArrayNode;
 };
 
 #endif /* COM_CTEC_CONTROLLER_NODECONTROLLER_H_ */
