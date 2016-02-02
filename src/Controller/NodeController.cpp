@@ -13,7 +13,7 @@ NodeController::		NodeController()
 	this->intNode.setValue(5);
 	this->stringArrayNode.setValue("words are fun");
 	this->otherArrayNode.setValue("linked node");
-	stringArrayNode
+//	stringArrayNode
 }
 
 NodeController::		~NodeController()

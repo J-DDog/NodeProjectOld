@@ -8,13 +8,22 @@
 #include "Node.h"
 #include <iostream>
 
+// Constructor
 template <class Type>
 Node<Type>::Node()
+{
+	pointers = nullptr;
+}
+
+// Constructor with the value
+template <class Type>
+Node<Type>::Node(Type value)
 {
 	this-> value = value;
 	pointers = nullptr;
 }
 
+// Deconstructor
 template <class Type>
 Node<Type>::~Node()
 {
