@@ -20,10 +20,21 @@ CTECArray<Type>::	CTECArray(int length)
 	}
 	else
 	{
-		head = new ArrayNode<Type>();
-
+		head = nullptr;
 		for(int spot = 0; spot < length; spot++)
 		{
+
+			if(head != nullptr) // make the next one
+			{
+				 ArrayNode<Type> nextNode;
+				 nextNode.setNext(head);
+				 head = &nextNode;
+			}
+			else
+			{
+				ArrayNode<Type> first;
+				head = &first;
+			}
 
 		}
 
@@ -35,7 +46,19 @@ CTECArray<Type>::	CTECArray(int length)
 template <class Type>
 CTECArray<Type>::	~CTECArray()
 {
-	// TODO Auto-generated destructor stub
+	ArrayNode<Type> * deleteNode;
+	for(int spot = this->length; spot < 0; spot--)
+	{
+		if(deleteNode->getNext() != nullptr)
+		{
+			head = deleteNode->getNext();
+			deleteNode->setNext(nullptr);
+		}
+		delete deleteNode->getNext();
+		deleteNode = head;
+
+	}
+	delete head;
 }
 
 template <class Type>
