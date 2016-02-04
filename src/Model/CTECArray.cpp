@@ -13,6 +13,22 @@ template <class Type>
 CTECArray<Type>::	CTECArray(int length)
 {
 	this->length = length;
+
+	if(length <= 0)
+	{
+		cerr << "Imposible!!!" << endl;
+	}
+	else
+	{
+		head = new ArrayNode<Type>();
+
+		for(int spot = 0; spot < length; spot++)
+		{
+
+		}
+
+	}
+
 }
 
 // Destructor
