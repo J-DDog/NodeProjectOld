@@ -16,8 +16,8 @@ public:
 	CTECArray(int length);
 	virtual ~CTECArray();
 	int Length();
-	Type * get(int position);
-	void set(int position, Type value);
+	Type get(int position);
+	void set(int position, const Type& value);
 private:
 	int length;
 	ArrayNode<Type> * head;

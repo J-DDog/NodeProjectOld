@@ -6,6 +6,7 @@
  */
 
 #include "CTECArray.h"
+#include <assert.h>
 using namespace std;
 
 // Constructor
@@ -13,32 +14,29 @@ template <class Type>
 CTECArray<Type>::	CTECArray(int length)
 {
 	this->length = length;
+	this->head = nullptr;
 
-	if(length <= 0)
+	assert(length > 0);
+
+
+	head = nullptr;
+	for(int spot = 0; spot < length; spot++)
 	{
-		cerr << "Imposible!!!" << endl;
-	}
-	else
-	{
-		head = nullptr;
-		for(int spot = 0; spot < length; spot++)
+
+		if(head != nullptr) // make the next one
 		{
-
-			if(head != nullptr) // make the next one
-			{
-				 ArrayNode<Type> nextNode;
-				 nextNode.setNext(head);
-				 head = &nextNode;
-			}
-			else
-			{
-				ArrayNode<Type> first;
-				head = &first;
-			}
-
+			 ArrayNode<Type> * nextNode = new ArrayNode<Type>();
+			 nextNode->setNext(head);
+			 head = nextNode;
+		}
+		else
+		{
+			ArrayNode<Type> * first = new ArrayNode<Type>();
+			head = first;
 		}
 
 	}
+
 
 }
 
@@ -69,51 +67,46 @@ int CTECArray<Type>:: Length()
 }
 
 template <class Type>
-Type * CTECArray<Type>::	get(int position)
+Type CTECArray<Type>::	get(int position)
 {
-	if(position >= length || position < 0) //Bounds Check for Length and negative
-	{
-		return nullptr;
-	}
-	else
-	{
-		ArrayNode<Type> * current = head;
-		for(int spot = 0; spot <= position; spot++) //Inclusive (inbounds)
-		{
 
-			if(spot != position) //Check if we have the desired position
-			{
-				current = current->next; //Moving to next position
-			}
-			else
-			{
-				return current->getValue; //Returning the current value because it has the position we want
-			}
+	assert(position < length && position >=0);
+
+	ArrayNode<Type> * current = head;
+	for(int spot = 0; spot <= position; spot++) //Inclusive (inbounds)
+	{
+
+		if(spot != position) //Check if we have the desired position
+		{
+			current = current->getNext(); //Moving to next position
+		}
+		else
+		{
+			Type temp = current->getValue(); //Grabbing the value in the node
+			return temp; //Returning a pointer to the value
 		}
 	}
+
 }
 
 template <class Type>
-void CTECArray<Type>::	set(int position, Type value)
+void CTECArray<Type>::	set(int position, const Type& value)
 {
-	if(position >= length || position < 0) //Bounds Check for Length and negative
-	{
-		cerr << "Dont't do this!" << endl;
-	}
-	else
-	{
-		ArrayNode<Type> * current = head;
-		for(int spot = 0; spot <= position; spot++) //Inclusive (inbounds)
-		{
 
-			if(spot != position) //Check if we have the desired position
-			{
-				current = current->next; //Moving to next position
-			}
-			else
-			{
-				current->setValue(value); //Returning the current value because it has the position we want
-			}
+	assert(position < length && position >=0);
+
+	ArrayNode<Type> * current = head;
+	for(int spot = 0; spot <= position; spot++) //Inclusive (inbounds)
+	{
+
+		if(spot != position) //Check if we have the desired position
+		{
+			current = current->getNext(); //Moving to next position
+		}
+		else
+		{
+			current->setValue(value); //Returning the current value because it has the position we want
 		}
 	}
+
 }
