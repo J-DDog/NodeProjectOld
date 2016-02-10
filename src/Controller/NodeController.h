@@ -26,10 +26,7 @@ public:
 	virtual ~NodeController();
 	void start();
 private:
-//	Node<int> intNode;
-//	ArrayNode<string> stringArrayNode;
-//	ArrayNode<string> otherArrayNode;
-	CTECArray<string> * myStringArray;
+	CTECArray<int> * notHipsterInts;
 };
 
 #endif /* COM_CTEC_CONTROLLER_NODECONTROLLER_H_ */

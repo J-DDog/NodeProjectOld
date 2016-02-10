@@ -10,11 +10,8 @@
 
 NodeController::		NodeController()
 {
-//	this->intNode.setValue(5);
-//	this->stringArrayNode.setValue("words are fun");
-//	this->otherArrayNode.setValue("linked node");
-//	this->stringArrayNode.setNext(&otherArrayNode);
-	myStringArray = new CTECArray<string>(5);
+	this->notHipsterInts = new CTECArray<int>(5);
+
 }
 
 NodeController::		~NodeController()
@@ -24,20 +21,17 @@ NodeController::		~NodeController()
 
 void NodeController::	start()
 {
-	string first = "first";
-	string secound = "not secound";
-	string third = "trois";
-	string forth = "yon";
-	string fifth = "cing";
-
-	myStringArray->set(0, first);
-	myStringArray->set(1, secound);
-	myStringArray->set(2, third);
-	myStringArray->set(3, forth);
-	myStringArray->set(4, fifth);
-
-	for(int index = 0; index < myStringArray->Length(); index++)
+	cout << notHipsterInts->Length() << endl;
+	for(int index = 0; index < notHipsterInts->Length(); index++)
 	{
-		cout << "The contents at " << index << " are: " << myStringArray->get(index) << endl;
+		notHipsterInts->set(index, (23 * index));
+		cout << index << endl;
 	}
+
+
+	for(int index = 0; index < notHipsterInts->Length(); index++)
+	{
+		cout << notHipsterInts->get(index) << endl;
+	}
+	cout << "test1" << endl;
 }

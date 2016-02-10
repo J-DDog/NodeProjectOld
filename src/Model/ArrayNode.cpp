@@ -47,6 +47,6 @@ ArrayNode<Type> * ArrayNode<Type>::	getNext()
 template <class Type>
 void ArrayNode<Type>::	setNext(ArrayNode<Type> * next)
 {
-
+	this->next = next;
 }
 
