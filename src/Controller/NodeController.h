@@ -16,6 +16,7 @@
 #include "../Model/ArrayNode.cpp"
 #include "../Model/CTECArray.h"
 #include "../Model/CTECArray.cpp"
+#include "../Model/Timer.h"
 
 using namespace std;
 
@@ -27,6 +28,7 @@ public:
 	void start();
 private:
 	CTECArray<int> * notHipsterInts;
+	Timer arrayTimer;
 };
 
 #endif /* COM_CTEC_CONTROLLER_NODECONTROLLER_H_ */

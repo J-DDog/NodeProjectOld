@@ -21,6 +21,8 @@ NodeController::		~NodeController()
 
 void NodeController::	start()
 {
+	arrayTimer.startTimer();
+
 	cout << notHipsterInts->Length() << endl;
 	for(int index = 0; index < notHipsterInts->Length(); index++)
 	{
@@ -34,4 +36,7 @@ void NodeController::	start()
 		cout << notHipsterInts->get(index) << endl;
 	}
 	cout << "test1" << endl;
+
+	arrayTimer.stopTimer();
+	arrayTimer.displayTimerInformation();
 }
