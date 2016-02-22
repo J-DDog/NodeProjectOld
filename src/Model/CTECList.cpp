@@ -8,80 +8,94 @@
 #include "CTECList.h"
 
 template <class Type>
-CTECList::CTECList()
+CTECList<Type>::CTECList()
 {
-	// TODO Auto-generated constructor stub
+	this->size = 0;
+	this->head = nullptr;
+	this->end = nullptr;
 
 }
 
 template <class Type>
-CTECList::~CTECList()
+CTECList<Type>::~CTECList()
 {
 	// TODO Auto-generated destructor stub
 }
 
 template <class Type>
-int CTECList::getSize()
+int CTECList<Type>::getSize()
 {
 
 }
 
 template <class Type>
-void CTECList::addToFront(Type value)
+void CTECList<Type>::addToFront(Type value)
 {
 
 }
 
 template <class Type>
-void CTECList::addToEnd(Type value)
+void CTECList<Type>::addToEnd(Type value)
 {
 
 }
 
 template <class Type>
-void CTECList::addAtIndex(int index, Type value)
+void CTECList<Type>::addAtIndex(int index, Type value)
 {
 
 }
 
 template <class Type>
-Type CTECList::getFront()
+Type CTECList<Type>::getFront()
 {
 
 }
 
 template <class Type>
-Type CTECList::getEnd()
+Type CTECList<Type>::getEnd()
 {
 
 }
 
 template <class Type>
-Type CTECList::getFromIdex(int index)
+Type CTECList<Type>::getFromIdex(int index)
 {
 
 }
 
 template <class Type>
-Type CTECList::removeFromFront()
+Type CTECList<Type>::removeFromFront()
+{
+	//Create a pointer to what is after head
+	ArrayNode<Type> * newHead;
+	newHead = head->getNext();
+
+	//Delete what head is pointing to
+	delete head;
+
+	//Set head to the new head
+	this->head = newHead;
+}
+
+template <class Type>
+Type CTECList<Type>::removeFromEnd()
+{
+	//Loop over size
+	//or
+	//Loop until getNext()->getNext() == nullptr
+
+
+}
+
+template <class Type>
+Type CTECList<Type>::removeFromIndex(int index)
 {
 
 }
 
 template <class Type>
-Type CTECList::reoveFromEnd()
-{
-
-}
-
-template <class Type>
-Type CTECList::removeFromIndex(int index)
-{
-
-}
-
-template <class Type>
-Type CTECList::set(int index, Type value)
+Type CTECList<Type>::set(int index, Type value)
 {
 
 }

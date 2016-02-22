@@ -13,7 +13,7 @@ using namespace std;
 template <class Type>
 CTECArray<Type>::	CTECArray(int length)
 {
-	this->length = length;
+	this->size = length;
 	this->head = nullptr;
 
 	assert(length > 0);
@@ -45,7 +45,7 @@ template <class Type>
 CTECArray<Type>::	~CTECArray()
 {
 	ArrayNode<Type> * deleteNode;
-	for(int spot = this->length; spot < 0; spot--)
+	for(int spot = this->size; spot < 0; spot--)
 	{
 		if(deleteNode->getNext() != nullptr)
 		{
@@ -62,7 +62,7 @@ CTECArray<Type>::	~CTECArray()
 template <class Type>
 int CTECArray<Type>:: Length()
 {
-	return this->length;
+	return this->size;
 
 }
 
@@ -70,7 +70,7 @@ template <class Type>
 Type CTECArray<Type>::	get(int position)
 {
 
-	assert(position < length && position >=0);
+	assert(position < size && position >=0);
 
 	ArrayNode<Type> * current = head;
 	for(int spot = 0; spot <= position; spot++) //Inclusive (inbounds)
@@ -93,7 +93,7 @@ template <class Type>
 void CTECArray<Type>::	set(int position, const Type& value)
 {
 
-	assert(position < length && position >=0);
+	assert(position < size && position >=0);
 
 	ArrayNode<Type> * current = head;
 	for(int spot = 0; spot <= position; spot++) //Inclusive (inbounds)

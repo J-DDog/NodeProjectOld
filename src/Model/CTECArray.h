@@ -19,8 +19,8 @@ public:
 	Type get(int position);
 	void set(int position, const Type& value);
 private:
-	int length;
-	ArrayNode<Type> * head;
+	int size;
+	ArrayNode<Type>* head;
 };
 
 #endif /* MODEL_CTECARRAY_H_ */
