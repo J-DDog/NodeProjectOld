@@ -11,7 +11,7 @@
 NodeController::		NodeController()
 {
 	this->notHipsterInts = new CTECArray<int>(5);
-
+	this->coolStrings = new CTECList<string>(5);
 }
 
 NodeController::		~NodeController()
@@ -35,7 +35,6 @@ void NodeController::	start()
 	{
 		cout << notHipsterInts->get(index) << endl;
 	}
-	cout << "test1" << endl;
 
 	arrayTimer.stopTimer();
 	arrayTimer.displayTimerInformation();

@@ -18,6 +18,7 @@ public:
 	int Length();
 	Type get(int position);
 	void set(int position, const Type& value);
+
 private:
 	int size;
 	ArrayNode<Type>* head;
