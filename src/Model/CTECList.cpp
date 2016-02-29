@@ -6,6 +6,7 @@
  */
 
 #include "CTECList.h"
+#include <assert.h>
 
 template <class Type>
 CTECList<Type>::CTECList()
@@ -13,6 +14,36 @@ CTECList<Type>::CTECList()
 	this->size = 0;
 	this->head = nullptr;
 	this->end = nullptr;
+
+}
+
+template <class Type>
+
+CTECList<Type>::CTECList(int size)
+{
+	this->size = size;
+	this->head = nullptr;
+	this->end = nullptr;
+
+	assert(size > 0);
+
+	for(int spot = 0; spot < size; spot++)
+	{
+
+		if(head != nullptr) //Make the first one
+		{
+			 ArrayNode<Type> * nextNode = new ArrayNode<Type>();
+			 nextNode->setNext(head);
+			 head = nextNode;
+			 end = nextNode;
+		}
+		else //Make the next one
+		{
+			ArrayNode<Type> * first = new ArrayNode<Type>();
+			head = first;
+		}
+
+	}
 
 }
 
@@ -25,6 +56,41 @@ CTECList<Type>::~CTECList()
 template <class Type>
 int CTECList<Type>::getSize()
 {
+
+}
+
+//Private helper method
+template <class Type>
+void CTECList<Type>::calculateSize()
+{
+	//Make sure that the list has content
+	assert(size >= 0);
+
+	//Declare variables
+	ArrayNode<Type>* counterPointer = head;
+	int count = 0;
+
+	//Check if there is anything in the list
+	if(counterPointer == nullptr)
+	{
+		//sets the size to 0 and ends the method
+		this->size = 0;
+		return;
+
+	}
+	else
+	{
+		//If not then add 1 to count and begin the counting loop
+		count++;
+		while(counterPointer->getNext() != nullptr)
+		{
+			counterPointer = counterPointer->getNext();
+			count++;
+		}
+
+		//Setting size after the list has been counted
+		this->size = count;
+	}
 
 }
 
@@ -56,26 +122,53 @@ template <class Type>
 Type CTECList<Type>::getEnd()
 {
 
+	assert(size > 0);
+
+
+
 }
 
 template <class Type>
 Type CTECList<Type>::getFromIdex(int index)
 {
+	assert(size > 0 && index >= 0 && index < size);
 
+	//Declaring variables
+	ArrayNode<Type>* returnPointer = head;
+	Type returnValue;
+
+	//Looping to final node
+	for(int pos = 0; pos < index; pos++)
+	{
+		returnPointer = returnPointer->getNext();
+	}
+	returnValue = returnPointer->getValue();
+
+	//Returning the value
+	return returnValue;
 }
 
 template <class Type>
 Type CTECList<Type>::removeFromFront()
 {
+	assert(this->size > 0);
+	//Declaring the the value to be returned
+	Type returnValue;
 	//Create a pointer to what is after head
 	ArrayNode<Type>* newHead;
-	newHead = head->getNext();
-
+	//Setting the newHead as the next Node
+	newHead = this->head->getNext();
+	//Getting the value
+	returnValue = this->head->getValue;
 	//Delete what head is pointing to
-	delete head;
-
+	delete this->head;
 	//Set head to the new head
 	this->head = newHead;
+
+	this->calculateSize();
+
+	//Returning the value
+	return returnValue;
 }
 
 template <class Type>
@@ -84,24 +177,83 @@ Type CTECList<Type>::removeFromEnd()
 	//Loop over size
 	//or
 	//Loop until getNext()->getNext() == nullptr
+	//Call calculate size before returning the value
+
+	assert(size > 0);
+
+	//Declaring variables
 	ArrayNode<Type>* deleteNode = head;
 	ArrayNode<Type>* previousNode;
+	Type returnValue;
 
+	//Looping up the the previous to last node
 	for(int index = 0; index < this->size-1; index++)
 	{
 		deleteNode = deleteNode->getNext();
 	}
+
+	//Grabbing the previousNode to deleteNode
 	previousNode = deleteNode;
-	previousNode->setNext(nullptr);
+	//Moving to the last node
 	deleteNode = deleteNode->getNext();
-	return deleteNode;
+	//Setting the previousNode pointer to null
+	previousNode->setNext(nullptr);
+	//Getting the last value
+	returnValue = deleteNode->getValue();
+	//Deleting the node
 	delete deleteNode;
+	this->calculateSize();
+	//Returning the value
+	return returnValue;
+
 }
 
 template <class Type>
 Type CTECList<Type>::removeFromIndex(int index)
 {
 
+	assert(this->size > 0 && index >= 0 && index < size);
+
+	//Declaring variables
+	ArrayNode<Type>* deleteNode = head;
+	ArrayNode<Type>* previousNode;
+	ArrayNode<Type>* newNext;
+	Type returnValue;
+
+	if(index == 0)
+	{
+		returnValue = removeFromFront();
+	}
+	else if(index == size - 1)
+	{
+		returnValue = removeFromEnd();
+	}
+	else
+	{
+		for(int spot = 0; spot < index + 1; spot++)
+		{
+
+		}
+	}
+
+	//Looping up the the node before the index node
+	for(int pos = 0; pos < index-1; pos++)
+	{
+		deleteNode = deleteNode->getNext();
+	}
+
+	//Grabbing the previousNode to deleteNode
+	previousNode = deleteNode;
+	//Moving to the last node
+	deleteNode = deleteNode->getNext();
+	//Setting the previousNode pointer to the next Pointer or null
+	previousNode->setNext(deleteNode->getNext());
+	//Getting the last value
+	returnValue = deleteNode->getValue();
+	//Deleting the node
+	delete deleteNode;
+	//Returning the value
+	return returnValue;
 }
 
 template <class Type>

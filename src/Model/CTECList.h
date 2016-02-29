@@ -16,6 +16,7 @@ class CTECList
 {
 public:
 	CTECList();
+	CTECList(int size);
 	virtual ~CTECList();
 	int getSize();
 	void addToFront(Type value);
@@ -32,6 +33,8 @@ private:
 	int size;
 	ArrayNode<Type>* head;
 	ArrayNode<Type>* end;
+
+	void calculateSize();
 };
 #endif /* MODEL_CTECLIST_H_ */
 

@@ -32,6 +32,10 @@ private:
 	CTECArray<int>* notHipsterInts;
 	CTECList<string>* coolStrings;
 	Timer arrayTimer;
+
+	void setupIntArray();
+	void setupStringArray();
+	void print();
 };
 
 #endif /* COM_CTEC_CONTROLLER_NODECONTROLLER_H_ */

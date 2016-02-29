@@ -11,16 +11,16 @@ using namespace std;
 
 // Constructor
 template <class Type>
-CTECArray<Type>::	CTECArray(int length)
+CTECArray<Type>::	CTECArray(int size)
 {
-	this->size = length;
+	this->size = size;
 	this->head = nullptr;
 
-	assert(length > 0);
+	assert(size > 0);
 
 
 	head = nullptr;
-	for(int spot = 0; spot < length; spot++)
+	for(int spot = 0; spot < size; spot++)
 	{
 
 		if(head != nullptr) // make the next one

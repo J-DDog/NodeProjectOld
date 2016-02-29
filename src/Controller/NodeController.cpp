@@ -23,19 +23,34 @@ void NodeController::	start()
 {
 	arrayTimer.startTimer();
 
-	cout << notHipsterInts->Length() << endl;
-	for(int index = 0; index < notHipsterInts->Length(); index++)
-	{
-		notHipsterInts->set(index, (23 * index));
-		cout << index << endl;
-	}
 
-
-	for(int index = 0; index < notHipsterInts->Length(); index++)
-	{
-		cout << notHipsterInts->get(index) << endl;
-	}
 
 	arrayTimer.stopTimer();
 	arrayTimer.displayTimerInformation();
+}
+
+void NodeController:: setupIntArray()
+{
+
+}
+
+void NodeController:: setupStringArray()
+{
+
+}
+
+void NodeController:: print()
+{
+		cout << notHipsterInts->Length() << endl;
+		for(int index = 0; index < notHipsterInts->Length(); index++)
+		{
+			notHipsterInts->set(index, (23 * index));
+			cout << index << endl;
+		}
+
+
+		for(int index = 0; index < notHipsterInts->Length(); index++)
+		{
+			cout << notHipsterInts->get(index) << endl;
+		}
 }
