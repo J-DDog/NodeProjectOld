@@ -30,17 +30,17 @@ CTECList<Type>::CTECList(int size)
 	for(int spot = 0; spot < size; spot++)
 	{
 
-		if(head != nullptr) //Make the first one
+		if(this->head != nullptr) //Make the first one
 		{
 			 ArrayNode<Type> * nextNode = new ArrayNode<Type>();
-			 nextNode->setNext(head);
-			 head = nextNode;
-			 end = nextNode;
+			 nextNode->setNext(this->head);
+			 this->head = nextNode;
+			 this->end = nextNode;
 		}
 		else //Make the next one
 		{
 			ArrayNode<Type> * first = new ArrayNode<Type>();
-			head = first;
+			this->head = first;
 		}
 
 	}
@@ -56,8 +56,8 @@ CTECList<Type>::~CTECList()
 template <class Type>
 int CTECList<Type>::getSize()
 {
-	calculateSize();
-	return size;
+	this->calculateSize();
+	return this->size;
 }
 
 //Private helper method
@@ -65,10 +65,10 @@ template <class Type>
 void CTECList<Type>::calculateSize()
 {
 	//Make sure that the list has content
-	assert(size >= 0);
+	assert(this->size >= 0);
 
 	//Declare variables
-	ArrayNode<Type>* counterPointer = head;
+	ArrayNode<Type>* counterPointer = this->head;
 	int count = 0;
 
 	//Check if there is anything in the list
@@ -105,7 +105,7 @@ void CTECList<Type>::addToFront(Type value)
 
 	ArrayNode<Type>* newNode = new ArrayNode<Type>(value);
 	newNode->setNext(this->head);
-	head->setNext(newNode);
+	this->head->setNext(newNode);
 	calculateSize();
 }
 
@@ -120,7 +120,7 @@ void CTECList<Type>::addToEnd(Type value)
 	ArrayNode<Type>* newNode = new ArrayNode<Type>(value);
 	this->end->setNext(newNode);
 	this->end = newNode;
-	calculateSize();
+	this->calculateSize();
 
 }
 
@@ -139,21 +139,21 @@ void CTECList<Type>::addAtIndex(int index, Type value)
 	{
 		this->addToFront(value);
 	}
-	else if(index == size-1)
+	else if(index == this->size-1)
 	{
 		this->addToEnd(value);
 	}
 	else
 	{
 		ArrayNode<Type>* newNode = new ArrayNode<Type>(value);
-		ArrayNode<Type>* currentNode = head;
+		ArrayNode<Type>* currentNode = this->head;
 		for(int spot = 0; spot < index; spot++)
 		{
 			currentNode = currentNode->getNext();
 		}
 		newNode->setNext(currentNode->getNext());
 		currentNode->setNext(newNode);
-		calculateSize();
+		this->calculateSize();
 
 	}
 
@@ -162,14 +162,14 @@ void CTECList<Type>::addAtIndex(int index, Type value)
 template <class Type>
 Type CTECList<Type>::getFront()
 {
-	assert(size > 0);
+	assert(this->size > 0);
 	return this->head;
 }
 
 template <class Type>
 Type CTECList<Type>::getEnd()
 {
-	assert(size > 0);
+	assert(this->size > 0);
 	return this->end;
 }
 
@@ -180,13 +180,13 @@ Type CTECList<Type>::getFromIdex(int index)
 	//loop to index
 	//return value from index
 
-	assert(size > 0 && index >= 0 && index < size);
+	assert(this->size > 0 && index >= 0 && index < this->size);
 
 	if(index == 0)
 	{
 		this->getFront();
 	}
-	else if(index == size-1)
+	else if(index == this->size-1)
 	{
 		this->getEnd();
 	}
@@ -233,11 +233,11 @@ Type CTECList<Type>::removeFromEnd()
 	//Loop until getNext()->getNext() == nullptr
 	//Call calculate size before returning the value
 
-	assert(size > 0);
+	assert(this->size > 0);
 
 	//Declaring variables
-	ArrayNode<Type>* deleteNode = end;
-	ArrayNode<Type>* previousNode = head;
+	ArrayNode<Type>* deleteNode = this->end;
+	ArrayNode<Type>* previousNode = this->head;
 	Type returnValue;
 
 	//Looping up the the previous to last node
@@ -253,7 +253,7 @@ Type CTECList<Type>::removeFromEnd()
 	//Deleting the node
 	delete deleteNode;
 
-	end = previousNode;
+	this->end = previousNode;
 
 	this->calculateSize();
 	//Returning the value
@@ -265,7 +265,7 @@ template <class Type>
 Type CTECList<Type>::removeFromIndex(int index)
 {
 
-	assert(this->size > 0 && index >= 0 && index < size);
+	assert(this->size > 0 && index >= 0 && index < this->size);
 
 	//Declaring variables
 	ArrayNode<Type>* deleteNode = head;
@@ -277,7 +277,7 @@ Type CTECList<Type>::removeFromIndex(int index)
 	{
 		returnValue = removeFromFront();
 	}
-	else if(index == size - 1)
+	else if(index == this->size - 1)
 	{
 		returnValue = removeFromEnd();
 	}
@@ -318,13 +318,13 @@ void CTECList<Type>::set(int index, Type value)
 	{
 		this->head->setValue(value);
 	}
-	else if(index == size-1)
+	else if(index == this->size-1)
 	{
 		this->end->setValue(value);
 	}
 	else
 	{
-		ArrayNode<Type>* currentNode = head;
+		ArrayNode<Type>* currentNode = this->head;
 		for(int spot = 0; spot <= index; spot++)
 		{
 			currentNode = currentNode->getNext();
