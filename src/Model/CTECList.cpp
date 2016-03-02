@@ -287,18 +287,19 @@ Type CTECList<Type>::removeFromIndex(int index)
 		{
 			deleteNode = deleteNode->getNext();
 		}
+
+		previousNode = deleteNode;
+		//Moving to the last node
+		deleteNode = deleteNode->getNext();
+		//Setting the previousNode pointer to the next Pointer or null
+		previousNode->setNext(deleteNode->getNext());
+		//Getting the last value
+		returnValue = deleteNode->getValue();
+		//Deleting the node
+		delete deleteNode;
 	}
 
-	//Grabbing the previousNode to deleteNode
-	previousNode = deleteNode;
-	//Moving to the last node
-	deleteNode = deleteNode->getNext();
-	//Setting the previousNode pointer to the next Pointer or null
-	previousNode->setNext(deleteNode->getNext());
-	//Getting the last value
-	returnValue = deleteNode->getValue();
-	//Deleting the node
-	delete deleteNode;
+
 	//Returning the value
 	return returnValue;
 }
