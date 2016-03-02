@@ -176,21 +176,30 @@ Type CTECList<Type>::getEnd()
 template <class Type>
 Type CTECList<Type>::getFromIdex(int index)
 {
+	//If its not front or back
+	//loop to index
+	//return value from index
+
 	assert(size > 0 && index >= 0 && index < size);
 
-	//Declaring variables
-	ArrayNode<Type>* returnPointer = head;
-	Type returnValue;
-
-	//Looping to final node
-	for(int pos = 0; pos < index; pos++)
+	if(index == 0)
 	{
-		returnPointer = returnPointer->getNext();
+		this->getFront();
 	}
-	returnValue = returnPointer->getValue();
+	else if(index == size-1)
+	{
+		this->getEnd();
+	}
+	else
+	{
+		ArrayNode<Type>* returnNode = this->head;
+		for(int pos = 0; pos <= index; pos++)
+		{
+			returnNode = returnNode->getNext();
+		}
+		return returnNode->getValue();
+	}
 
-	//Returning the value
-	return returnValue;
 }
 
 template <class Type>
