@@ -139,7 +139,7 @@ void CTECList<Type>::addAtIndex(int index, Type value)
 	{
 		this->addToFront(value);
 	}
-	else if(index == this->size-1)
+	else if(index == this->size)
 	{
 		this->addToEnd(value);
 	}
