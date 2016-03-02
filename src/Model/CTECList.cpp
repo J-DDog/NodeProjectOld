@@ -56,7 +56,8 @@ CTECList<Type>::~CTECList()
 template <class Type>
 int CTECList<Type>::getSize()
 {
-
+	calculateSize();
+	return size;
 }
 
 //Private helper method
@@ -97,35 +98,79 @@ void CTECList<Type>::calculateSize()
 template <class Type>
 void CTECList<Type>::addToFront(Type value)
 {
+	//Create newNode with value
+	//Set newNode's next to head
+	//Set head to newNode
+	//calculate size
 
+	ArrayNode<Type>* newNode = new ArrayNode<Type>(value);
+	newNode->setNext(this->head);
+	head->setNext(newNode);
+	calculateSize();
 }
 
 template <class Type>
 void CTECList<Type>::addToEnd(Type value)
 {
+	//Make newNode with value
+	//set end's next to newNode
+	//set end to newNode
+	//calculate size
+
+	ArrayNode<Type>* newNode = new ArrayNode<Type>(value);
+	this->end->setNext(newNode);
+	this->end = newNode;
+	calculateSize();
 
 }
 
 template <class Type>
 void CTECList<Type>::addAtIndex(int index, Type value)
 {
+	//check if index is 0 or size-1
+	//call add methods if so
+	//make newNode from value
+	//else loop to before index
+	//set newNode's next to currentNodes next
+	//set currentNode's next to newNode
+	//Calculate size
+
+	if(index == 0)
+	{
+		this->addToFront(value);
+	}
+	else if(index == size-1)
+	{
+		this->addToEnd(value);
+	}
+	else
+	{
+		ArrayNode<Type>* newNode = new ArrayNode<Type>(value);
+		ArrayNode<Type>* currentNode = head;
+		for(int spot = 0; spot < index; spot++)
+		{
+			currentNode = currentNode->getNext();
+		}
+		newNode->setNext(currentNode->getNext());
+		currentNode->setNext(newNode);
+		calculateSize();
+
+	}
 
 }
 
 template <class Type>
 Type CTECList<Type>::getFront()
 {
-
+	assert(size > 0);
+	return this->head;
 }
 
 template <class Type>
 Type CTECList<Type>::getEnd()
 {
-
 	assert(size > 0);
-
-
-
+	return this->end;
 }
 
 template <class Type>
@@ -182,26 +227,25 @@ Type CTECList<Type>::removeFromEnd()
 	assert(size > 0);
 
 	//Declaring variables
-	ArrayNode<Type>* deleteNode = head;
-	ArrayNode<Type>* previousNode;
+	ArrayNode<Type>* deleteNode = end;
+	ArrayNode<Type>* previousNode = head;
 	Type returnValue;
 
 	//Looping up the the previous to last node
 	for(int index = 0; index < this->size-1; index++)
 	{
-		deleteNode = deleteNode->getNext();
+		previousNode = previousNode->getNext();
 	}
 
-	//Grabbing the previousNode to deleteNode
-	previousNode = deleteNode;
-	//Moving to the last node
-	deleteNode = deleteNode->getNext();
 	//Setting the previousNode pointer to null
 	previousNode->setNext(nullptr);
 	//Getting the last value
 	returnValue = deleteNode->getValue();
 	//Deleting the node
 	delete deleteNode;
+
+	end = previousNode;
+
 	this->calculateSize();
 	//Returning the value
 	return returnValue;
@@ -230,16 +274,10 @@ Type CTECList<Type>::removeFromIndex(int index)
 	}
 	else
 	{
-		for(int spot = 0; spot < index + 1; spot++)
+		for(int spot = 0; spot < index; spot++)
 		{
-
+			deleteNode = deleteNode->getNext();
 		}
-	}
-
-	//Looping up the the node before the index node
-	for(int pos = 0; pos < index-1; pos++)
-	{
-		deleteNode = deleteNode->getNext();
 	}
 
 	//Grabbing the previousNode to deleteNode
