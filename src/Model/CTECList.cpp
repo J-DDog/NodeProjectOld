@@ -135,6 +135,8 @@ void CTECList<Type>::addAtIndex(int index, Type value)
 	//set currentNode's next to newNode
 	//Calculate size
 
+	assert(index >= 0 && !index > this->size);
+
 	if(index == 0)
 	{
 		this->addToFront(value);
