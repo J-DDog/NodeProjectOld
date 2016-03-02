@@ -304,7 +304,30 @@ Type CTECList<Type>::removeFromIndex(int index)
 }
 
 template <class Type>
-Type CTECList<Type>::set(int index, Type value)
+void CTECList<Type>::set(int index, Type value)
 {
+	//Check if index is 0
+	//if so set head value to new value
+	//else if index is size-1
+	//if so set end value to new value
+	//else loop to index
+	//set index value to new value
 
+	if(index == 0)
+	{
+		this->head->setValue(value);
+	}
+	else if(index == size-1)
+	{
+		this->end->setValue(value);
+	}
+	else
+	{
+		ArrayNode<Type>* currentNode = head;
+		for(int spot = 0; spot <= index; spot++)
+		{
+			currentNode = currentNode->getNext();
+		}
+		currentNode->setValue(value);
+	}
 }

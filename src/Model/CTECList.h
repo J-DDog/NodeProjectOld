@@ -28,7 +28,7 @@ public:
 	Type removeFromFront();
 	Type removeFromEnd();
 	Type removeFromIndex(int index);
-	Type set(int index, Type value);
+	void set(int index, Type value);
 private:
 	int size;
 	ArrayNode<Type>* head;
