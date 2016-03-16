@@ -47,10 +47,31 @@ CTECList<Type>::CTECList(int size)
 
 }
 
+/*
+ * 1: Start at head
+ * 2: Iterate over Nodes
+ * 3: Update position, then delete
+ * 4: Delete Final
+ * 5: Reset size
+ */
 template <class Type>
 CTECList<Type>::~CTECList()
 {
-	// TODO Auto-generated destructor stub
+	ArrayNode<Type>* current = head;
+
+	for(int deleteCount = 0; deleteCount < size; deleteCount++)
+	{
+		ArrayNode<Type>* temp = current;
+
+		current = current->getNext();
+		head = current;
+		delete temp;
+	}
+
+	delete head;
+	head = nullptr;
+	end = nullptr;
+	size = 0;
 }
 
 template <class Type>
@@ -96,7 +117,7 @@ void CTECList<Type>::calculateSize()
 }
 
 template <class Type>
-void CTECList<Type>::addToFront(Type value)
+void CTECList<Type>::addToFront(const Type& value)
 {
 	//Create newNode with value
 	//Set newNode's next to head
@@ -110,7 +131,7 @@ void CTECList<Type>::addToFront(Type value)
 }
 
 template <class Type>
-void CTECList<Type>::addToEnd(Type value)
+void CTECList<Type>::addToEnd(const Type& value)
 {
 	//Make newNode with value
 	//set end's next to newNode
@@ -125,7 +146,7 @@ void CTECList<Type>::addToEnd(Type value)
 }
 
 template <class Type>
-void CTECList<Type>::addAtIndex(int index, Type value)
+void CTECList<Type>::addAtIndex(int index, const Type& value)
 {
 	//check if index is 0 or size-1
 	//call add methods if so
@@ -135,7 +156,7 @@ void CTECList<Type>::addAtIndex(int index, Type value)
 	//set currentNode's next to newNode
 	//Calculate size
 
-	assert(index >= 0 && !index > this->size);
+	assert(index >= 0 && index <= this->size);
 
 	if(index == 0)
 	{
@@ -165,18 +186,18 @@ template <class Type>
 Type CTECList<Type>::getFront()
 {
 	assert(this->size > 0);
-	return this->head;
+	return this->head->getValue();
 }
 
 template <class Type>
 Type CTECList<Type>::getEnd()
 {
 	assert(this->size > 0);
-	return this->end;
+	return this->end->getValue();
 }
 
 template <class Type>
-Type CTECList<Type>::getFromIdex(int index)
+Type CTECList<Type>::getFromIndex(int index)
 {
 	//If its not front or back
 	//loop to index
@@ -215,7 +236,7 @@ Type CTECList<Type>::removeFromFront()
 	//Setting the newHead as the next Node
 	newHead = this->head->getNext();
 	//Getting the value
-	returnValue = this->head->getValue;
+	returnValue = this->head->getValue();
 	//Delete what head is pointing to
 	delete this->head;
 	//Set head to the new head
@@ -307,7 +328,7 @@ Type CTECList<Type>::removeFromIndex(int index)
 }
 
 template <class Type>
-void CTECList<Type>::set(int index, Type value)
+void CTECList<Type>::set(int index, const Type& value)
 {
 	//Check if index is 0
 	//if so set head value to new value
